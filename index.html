@@ -1,0 +1,2089 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>SharpIce Mirrors</title>
+    <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="lib/jquery/jquery-3.6.0.min.js"></script>
+    <script src="lib\bootstrap\js/bootstrap.min.js"></script>
+    <script src="js/markup.min.js"></script>
+    <script src="js/webfont.js"></script>
+    <script src="js/thuhidden.js"></script>
+    <style>
+        .container {
+            width: 85%
+        }
+        
+        .container>.navbar-header {
+            margin-right: 0;
+            margin-left: 0
+        }
+        
+        .navbar-nav {
+            float: left;
+            margin: 0
+        }
+        
+        .navbar-nav>li {
+            float: left
+        }
+        
+        .navbar-nav>li>a {
+            padding-top: 15px;
+            padding-bottom: 15px
+        }
+        
+        .navbar-nav.navbar-right:last-child {
+            margin-right: -15px
+        }
+        
+        .navbar-left {
+            float: left !important
+        }
+        
+        .navbar-right {
+            float: right !important
+        }
+        
+        .navbar-header:after {
+            clear: none
+        }
+        
+        a.navbar-brand {
+            width: 20em
+        }
+    </style>
+</head>
+
+<body>
+    <div id="mirrors">
+        <div class="spacing hidden-xs"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-8 table-responsive" id="mirror-list">
+                    <div class="row">
+                        <h3 id="mirror-title">
+                            <svg class="icon">
+									<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-cube"></use>
+								</svg> 镜像列表
+                        </h3>
+                    </div>
+                    <table class="table" v-if="mirrorList.length">
+                        <thead>
+                            <tr class="row">
+                                <th class="col-xs-8">名称</th>
+                                <th class="col-xs-4">创建时间</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/CRAN/" title="R 语言的可执行文件、源代码和说明文件，也收录了各种用户撰写的软件包"> CRAN </a>
+                                    <a href="/help/CRAN/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 15:35 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/CTAN/" title="TeX 的各种发行版、软件包和文档"> CTAN </a>
+                                    <a href="/help/CTAN/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 19:41 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/help/CocoaPods/" title="Objective-C 和 Swift 的依赖管理器"> CocoaPods </a>
+                                    <a href="/help/CocoaPods/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 19:10 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/ELK/" title="现已更名为 Elastic Stack，仅保留用作向后兼容"> ELK </a>
+                                </td>
+                                <td> 2022-04-19 06:57 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/github-release/FreeCAD/FreeCAD/" title="基于 Qt 的计算机辅助设计程序"> FreeCAD </a>
+                                </td>
+                                <td> 2022-04-19 14:16 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/KaOS/" title="一个基于 KDE 的独立发行版"> KaOS </a>
+                                </td>
+                                <td> 2022-04-19 17:35 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/NetBSD/" title="NetBSD 的安装镜像和部分系统源码"> NetBSD </a>
+                                </td>
+                                <td> 2022-04-19 18:53 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/OpenBSD/" title="OpenBSD 的安装镜像和官方软件包仓库"> OpenBSD </a>
+                                </td>
+                                <td> 2022-04-19 20:15 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/OpenMediaVault/" title="基于 Debian Linux 的网络附加存储(NAS)解决方案"> OpenMediaVault </a>
+                                    <a href="/help/openmediavault/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 09:24 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/github-release/VSCodium/vscodium/" title="VS Code 的社区编译版本"> VSCodium </a>
+                                </td>
+                                <td> 2022-04-19 14:16 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/adobe-fonts/" title="Adobe 公司的开源字体"> adobe-fonts </a>
+                                </td>
+                                <td> 2022-04-19 19:51 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/alpine/" title="Alpine Linux 的安装镜像和官方软件包仓库"> alpine </a>
+                                    <a href="/help/alpine/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 18:45 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/anaconda/" title="用于科学计算的 Python 发行版"> anaconda </a>
+                                    <a href="/help/anaconda/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 12:12 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/anthon/" title="Anthon Linux（安同 Linux）的安装镜像和官方软件包仓库"> anthon </a>
+                                    <a href="/help/anthon/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 21:03 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/aosp-monthly/" title="AOSP （Android 系统源码）镜像每月打包"> aosp-monthly </a>
+                                </td>
+                                <td> 2022-04-19 20:07 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/apache/" title="Apache 基金会赞助的各个项目"> apache </a>
+                                </td>
+                                <td> 2022-04-19 18:23 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/arch4edu/" title="用于 Arch Linux 和 Arch Linux ARM 的非官方软件仓库，主要包含科研、教学所需的各种常用软件"> arch4edu </a>
+                                    <a href="/help/arch4edu/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 19:34 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/archlinux/" title="Arch Linux 的安装镜像和官方软件包仓库"> archlinux </a>
+                                    <a href="/help/archlinux/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 20:16 </td>
+                            </tr>
+                            <tr class="row status-syncing">
+                                <td>
+                                    <a class="mirror-item-label" href="/osdn/arch-linux-gui/" title="Arch Linux 图形化安装器"> archlinux-gui </a>
+                                </td>
+                                <td> 2022-04-19 17:17<span class="label label-status label-info">syncing</span>
+                                </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/archlinuxarm/" title="用于 ARM 平台的 Arch Linux 镜像和软件包仓库"> archlinuxarm </a>
+                                    <a href="/help/archlinuxarm/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 20:37 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/archlinuxcn/" title="由 Arch Linux 中文社区驱动的非官方用户仓库，包含中文用户常用软件、工具、字体/美化包等"> archlinuxcn </a>
+                                    <a href="/help/archlinuxcn/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 21:01 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/armbian/" title="Armbian（面向 ARM 单板机的发行版）的软件源"> armbian </a>
+                                </td>
+                                <td> 2022-04-19 19:44 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/armbian-releases/" title="Armbian 的安装镜像"> armbian-releases </a>
+                                </td>
+                                <td> 2022-04-19 15:23 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/artixlinux/" title="Artix Linux 的官方软件包仓库（基于 Arch Linux 的不使用 systemd 的发行版）"> artixlinux </a>
+                                </td>
+                                <td> 2022-04-19 18:34 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/artixlinux-iso/" title="Artix Linux 的安装镜像"> artixlinux-iso </a>
+                                </td>
+                                <td> 2022-04-19 18:19 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/bananian/" title="用于 Banana Pi 的 Debian 操作系统"> bananian </a>
+                                    <a href="/help/bananian/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 17:28 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/help/binutils-gdb.git/" title="Binutils 和 GDB 等开发工具的源码 Git 仓库"> binutils-gdb.git </a>
+                                    <a href="/help/binutils-gdb.git/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 19:50 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/bioconductor/" title="开源的基因数据分析处理工具"> bioconductor </a>
+                                    <a href="/help/bioconductor/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 20:16 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/bjlx/" title="北京龙芯 &amp; Debian 俱乐部 的公开软件源"> bjlx </a>
+                                </td>
+                                <td> 2022-04-19 19:57 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/blackarch/" title="用于安全评估的基于 Arch Linux 的轻量级发行版"> blackarch </a>
+                                </td>
+                                <td> 2022-04-19 21:03 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/blender/" title="专业的三维计算机图形软件"> blender </a>
+                                </td>
+                                <td> 2022-04-19 02:33 </td>
+                            </tr>
+                            <tr class="row status-syncing">
+                                <td>
+                                    <a class="mirror-item-label" href="/cc/" title="CERN CentOS"> cc </a>
+                                </td>
+                                <td> 0000-00-00 00:00<span class="label label-status label-info">syncing</span>
+                                </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/centos/" title="CentOS 的安装镜像和官方软件包仓库"> centos </a>
+                                    <a href="/help/centos/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 19:39 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/centos-altarch/" title="CentOS 额外平台的安装镜像和官方软件包仓库"> centos-altarch </a>
+                                    <a href="/help/centos-altarch/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 15:54 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/centos-stream/" title="???"> centos-stream </a>
+                                    <span class="label label-new">new</span>
+                                </td>
+                                <td> 2022-04-19 15:30 </td>
+                            </tr>
+                            <tr class="row status-syncing">
+                                <td>
+                                    <a class="mirror-item-label" href="/centos-vault/" title="为旧版本 CentOS 提供服务的软件包仓库"> centos-vault </a>
+                                    <a href="/help/centos-vault/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 12:55<span class="label label-status label-info">syncing</span>
+                                </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/ceph/" title="高性能对象存储和文件系统"> ceph </a>
+                                    <a href="/help/ceph/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 20:06 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/chef/" title="自动化服务器配置管理工具"> chef </a>
+                                    <a href="/help/chef/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-18 03:36 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/clickhouse/" title="用于联机分析（OLAP）的列式数据库管理系统"> clickhouse </a>
+                                    <a href="/help/clickhouse/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 13:03 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/clojars/" title="Clojure 语言的第三方软件包仓库"> clojars </a>
+                                </td>
+                                <td> 2022-04-19 20:26 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/github-release/cmderdev/cmder/" title="Windows 下的终端模拟器套件"> cmder </a>
+                                </td>
+                                <td> 2022-04-19 14:16 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/help/crates.io-index.git/" title="面向 Rust 语言的软件包索引 crates.io"> crates.io-index.git </a>
+                                    <a href="/help/crates.io-index.git/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 19:19 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/ctex/" title="旧版 CTEX 安装镜像存档"> ctex </a>
+                                </td>
+                                <td> 2022-04-19 19:34 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/cygwin/" title="Cygwin 官方软件包仓库"> cygwin </a>
+                                    <a href="/help/cygwin/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 17:49 </td>
+                            </tr>
+                            <tr class="row status-syncing">
+                                <td>
+                                    <a class="mirror-item-label" href="/dart-pub/" title="Dart 语言的软件包仓库"> dart-pub </a>
+                                    <a href="/help/dart-pub/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 19:29<span class="label label-status label-info">syncing</span>
+                                </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/debian/" title="Debian Linux 的官方软件包仓库"> debian </a>
+                                    <a href="/help/debian/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 16:46 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/debian-cd/" title="Debian Linux 的安装镜像"> debian-cd </a>
+                                </td>
+                                <td> 2022-04-19 18:57 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/debian-multimedia/" title="Debian Linux 第三方多媒体软件源"> debian-multimedia </a>
+                                </td>
+                                <td> 2022-04-19 20:40 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/debian-nonfree/" title="Debian Linux 的非自由软件包仓库"> debian-nonfree </a>
+                                </td>
+                                <td> 2022-04-19 15:34 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/debian-security/" title="Debian Linux 的安全更新"> debian-security </a>
+                                </td>
+                                <td> 2022-04-19 15:12 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/deepin/" title="Deepin Linux 的官方软件包仓库"> deepin </a>
+                                </td>
+                                <td> 2022-04-19 15:46 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/deepin-cd/" title="Deepin Linux 的安装镜像"> deepin-cd </a>
+                                </td>
+                                <td> 2022-04-19 20:59 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/docker-ce/" title="Docker Community Edition 的安装包"> docker-ce </a>
+                                    <a href="/help/docker-ce/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 14:15 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/dotdeb/" title="用于 Debian 服务器的额外镜像源"> dotdeb </a>
+                                </td>
+                                <td> 2022-04-19 17:14 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/eclipse/" title="著名的集成开发环境 Eclipse"> eclipse </a>
+                                </td>
+                                <td> 2022-04-19 17:10 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/elasticstack/" title="ELK 系列数据分析工具，5.x 之后改名为 Elastic Stack"> elasticstack </a>
+                                </td>
+                                <td> 2022-04-19 08:29 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/elpa/" title="Emacs 内建包管理器 package.el 的软件源"> elpa </a>
+                                    <a href="/help/elpa/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 19:36 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/elrepo/" title="RHEL 及其变体的 RPM 软件包仓库"> elrepo </a>
+                                    <a href="/help/elrepo/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 18:03 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/elvish/" title="TUNA 前会长 xiaq 开发的革命性 Shell"> elvish </a>
+                                </td>
+                                <td> 2022-04-19 18:13 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/endeavouros/" title="???"> endeavouros </a>
+                                </td>
+                                <td> 2022-04-19 19:11 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/epel/" title="企业版 Linux 附加软件包"> epel </a>
+                                    <a href="/help/epel/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 16:37 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/erlang-solutions/" title="为各大 Linux 发行版提供的 Erlang 软件包"> erlang-solutions </a>
+                                    <a href="/help/erlang-solutions/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 04:48 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/fdroid/" title="F-Droid 是 Android 上的自由与开源软件应用商店"> fdroid </a>
+                                    <a href="/help/fdroid/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 08:47 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/fedora/" title="Fedora Linux 的安装镜像和官方软件包仓库"> fedora </a>
+                                    <a href="/help/fedora/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 17:49 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/fedora-altarch/" title="Fedora Linux 额外平台的安装镜像和官方软件包仓库"> fedora-altarch </a>
+                                </td>
+                                <td> 2022-04-19 16:58 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/flightgear/" title="多平台的飞行模拟器"> flightgear </a>
+                                </td>
+                                <td> 2022-04-19 18:12 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/flutter/" title="Flutter 框架 SDK 镜像"> flutter </a>
+                                    <a href="/help/flutter/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 00:18 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/help/flutter-sdk.git/" title="Flutter 框架源码镜像"> flutter-sdk.git </a>
+                                    <a href="/help/flutter-sdk.git/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 20:52 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/fzug/" title="Fedora 中文用户组的软件包仓库"> fzug </a>
+                                </td>
+                                <td> 2022-04-19 19:34 </td>
+                            </tr>
+                            <tr class="row status-syncing">
+                                <td>
+                                    <a class="mirror-item-label" href="/osdn/storage/g/g/ga/garuda-linux/" title="Garuda Linux是基于Arch Linux操作系统的滚动式发行版"> garuda-linux </a>
+                                </td>
+                                <td> 2022-04-19 17:17<span class="label label-status label-info">syncing</span>
+                                </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/help/gcc.git/" title="GCC 的源码仓库"> gcc.git </a>
+                                    <a href="/help/gcc.git/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 20:38 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/gentoo/" title="Gentoo Linux 的 Stage 3 镜像"> gentoo </a>
+                                </td>
+                                <td> 2022-04-19 17:16 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/gentoo-portage/" title="Gentoo Linux 的 Portage 包管理器镜像源（HTTP / rsync 访问）"> gentoo-portage </a>
+                                    <a href="/help/gentoo-portage/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 17:02 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/gentoo-portage-prefix/" title="Gentoo/Prefix 的 Portage 包管理器镜像源（仅适用于 macOS）"> gentoo-portage-prefix </a>
+                                    <a href="/help/gentoo-prefix/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 19:03 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/help/gentoo-portage.git/" title="Gentoo Linux 的 Portage 包管理器镜像源（Git 访问）"> gentoo-portage.git </a>
+                                    <a href="/help/gentoo-portage.git/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 20:21 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/github-release/git-for-windows/git/" title="Git 工具的 Windows 系统版本"> git-for-windows </a>
+                                </td>
+                                <td> 2022-04-19 14:16 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/help/git-repo/" title="Google 开发的项目依赖下载工具 repo 的镜像"> git-repo </a>
+                                    <a href="/help/git-repo/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 21:01 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/github-raw/" title="一些 Github 项目的部分文件镜像（被其他镜像所使用）"> github-raw </a>
+                                </td>
+                                <td> 2022-04-19 15:31 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/github-release/" title="一些项目的 Github Release 镜像"> github-release </a>
+                                </td>
+                                <td> 2022-04-19 14:16 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/gitlab-ce/" title="Gitlab 社区版"> gitlab-ce </a>
+                                    <a href="/help/gitlab-ce/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 14:35 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/gitlab-ee/" title="Gitlab 企业版"> gitlab-ee </a>
+                                </td>
+                                <td> 2022-04-19 17:08 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/gitlab-runner/" title="GitLab 持续集成框架版本 10 及以上"> gitlab-runner </a>
+                                    <a href="/help/gitlab-runner/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 00:39 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/help/glibc.git/" title="GNU C Library 的源码 Git 仓库"> glibc.git </a>
+                                    <a href="/help/glibc.git/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 19:50 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/gnu/" title="GNU 项目的软件包（源代码、文档和部分平台的二进制文件）"> gnu </a>
+                                </td>
+                                <td> 2022-04-19 18:37 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/gnu-alpha/" title="一些尚未达到生产质量的 GNU 项目的软件包"> gnu-alpha </a>
+                                </td>
+                                <td> 2022-04-19 17:34 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/github-release/googlefonts/" title="Google 设计的 Noto 系列开源字体"> googlefonts </a>
+                                </td>
+                                <td> 2022-04-19 14:16 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/grafana/" title="开源的数据可视化工具"> grafana </a>
+                                    <a href="/help/grafana/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 08:59 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/hackage/" title="Haskell 社区的中心软件包仓库"> hackage </a>
+                                    <a href="/help/hackage/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 19:01 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/help/homebrew/" title="Homebrew/Linuxbrew 的 taps（软件包描述文件 Git 仓库）"> homebrew </a>
+                                    <a href="/help/homebrew/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 20:30 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/homebrew-bottles/" title="预编译的 Homebrew 软件包"> homebrew-bottles </a>
+                                    <a href="/help/homebrew-bottles/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 18:23 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/github-release/iina/iina/" title="macOS 上的现代化开源视频播放器"> iina </a>
+                                </td>
+                                <td> 2022-04-19 14:16 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/influxdata/" title="时间序列数据平台"> influxdata </a>
+                                    <a href="/help/influxdata/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 16:40 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/ius/" title="为企业版 Linux 提供最新软件包的镜像源"> ius </a>
+                                </td>
+                                <td> 2022-04-19 15:47 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/jenkins/" title="用 Java 编写的持续集成框架"> jenkins </a>
+                                </td>
+                                <td> 2022-04-19 20:12 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/julia/" title="Julia 编程语言的包管理器镜像"> julia </a>
+                                    <a href="/help/julia/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 20:38 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/julia-releases/" title="Julia 二进制程序镜像"> julia-releases </a>
+                                    <a href="/help/julia-releases/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 18:11 </td>
+                            </tr>
+                            <tr class="row status-syncing">
+                                <td>
+                                    <a class="mirror-item-label" href="/kali/" title="Kali Linux 的官方软件包仓库"> kali </a>
+                                </td>
+                                <td> 2022-04-12 08:57<span class="label label-status label-info">syncing</span>
+                                </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/kali-images/" title="Kali Linux 的安装镜像"> kali-images </a>
+                                </td>
+                                <td> 2022-04-19 17:06 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/kernel/" title="各个版本的 Linux 内核源代码压缩包和补丁"> kernel </a>
+                                </td>
+                                <td> 2022-04-19 16:34 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/kicad/" title="开源的电路原理图与 PCB 设计工具"> kicad </a>
+                                    <a href="/help/kicad/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 17:22 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/kodi/" title="开源的多媒体播放器，原名 XBMC"> kodi </a>
+                                </td>
+                                <td> 2022-04-19 19:23 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/kubernetes/" title="Kubernetes 是用于集群自动部署和管理的开源系统"> kubernetes </a>
+                                    <a href="/help/kubernetes/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-18 01:46 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/libreoffice/" title="自由的办公软件套件"> libreoffice </a>
+                                </td>
+                                <td> 2022-04-19 18:16 </td>
+                            </tr>
+                            <tr class="row status-syncing">
+                                <td>
+                                    <a class="mirror-item-label" href="/lineage-rom/" title="最大的社区Android发行版之一Lineage的ROM"> lineage-rom </a>
+                                    <a href="/help/lineage-rom/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-17 03:40<span class="label label-status label-info">syncing</span>
+                                </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/help/lineageOS/" title="最大的社区Android发行版之一Lineage的源代码"> lineageOS </a>
+                                    <a href="/help/lineageOS/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 19:12 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/help/linux-firmware.git/" title="Linux 内核附带的固件 Git 仓库"> linux-firmware.git </a>
+                                    <a href="/help/linux-firmware.git/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 19:28 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/help/linux-next.git/" title="Linux 内核源代码的 Git 仓库，开发分支（包含为下一个 merge windows 开发的 patch）"> linux-next.git </a>
+                                    <a href="/help/linux-next.git/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 20:51 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/help/linux-stable.git/" title="Linux 内核源代码的 Git 仓库, 稳定版分支"> linux-stable.git </a>
+                                    <a href="/help/linux-stable.git/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 20:48 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/help/linux.git/" title="Linux 内核源代码的 Git 仓库"> linux.git </a>
+                                    <a href="/help/linux.git/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 19:59 </td>
+                            </tr>
+                            <tr class="row status-syncing">
+                                <td>
+                                    <a class="mirror-item-label" href="/osdn/storage/g/l/li/linuxlite/" title="基于 Ubuntu 长期支持版本（LTS）的 Linux 发行版 Linux Lite 的安装镜像"> linuxlite-cd </a>
+                                </td>
+                                <td> 2022-04-19 17:17<span class="label label-status label-info">syncing</span>
+                                </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/linuxmint/" title="Linux Mint 的官方软件源"> linuxmint </a>
+                                    <a href="/help/linuxmint/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 21:01 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/linuxmint-cd/" title="Linux Mint 的安装镜像"> linuxmint-cd </a>
+                                </td>
+                                <td> 2022-04-19 15:45 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/llvm-apt/" title="LLVM 编译器套件的 APT 安装源"> llvm-apt </a>
+                                </td>
+                                <td> 2022-04-19 00:30 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/github-release/llvm/llvm-project/" title="LLVM 编译器套件可执行文件"> llvm-binary </a>
+                                </td>
+                                <td> 2022-04-19 14:16 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/help/llvm-project.git/" title="LLVM 编译器套件的新源码仓库（monorepo）"> llvm-project.git </a>
+                                    <a href="/help/llvm-project.git/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 19:46 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/loongson/" title="用于龙芯电脑的软件包"> loongson </a>
+                                </td>
+                                <td> 2022-04-19 20:00 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/lxc-images/" title="Linux 容器的镜像"> lxc-images </a>
+                                    <a href="/help/lxc-images/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 16:38 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/lyx/" title="所见即所指的 LaTeX 编辑器"> lyx </a>
+                                </td>
+                                <td> 2022-04-19 16:16 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/macports/" title="macOS 的一个开源软件包管理系统"> macports </a>
+                                </td>
+                                <td> 2022-04-19 17:26 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/mageia/" title="Mageia Linux（衍生于 Mandriva Linux）的安装镜像和官方软件包仓库"> mageia </a>
+                                </td>
+                                <td> 2022-04-19 20:44 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/manjaro/" title="Manjaro Linux 的官方软件源"> manjaro </a>
+                                </td>
+                                <td> 2022-04-19 17:36 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/manjaro-arm/" title="Manjaro ARM Linux 的官方软件源"> manjaro-arm </a>
+                                </td>
+                                <td> 2022-04-19 17:32 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/mariadb/" title="衍生于 MySQL 的开源关系数据库"> mariadb </a>
+                                    <a href="/help/mariadb/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 15:58 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/github-release/conda-forge/miniforge/" title="适用于 conda-forge 的最小化 conda 安装器"> miniforge </a>
+                                </td>
+                                <td> 2022-04-19 14:16 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/github-release/kubernetes/minikube/" title="在本地运行的单节点 Kubernetes 集群安装工具"> minikube </a>
+                                </td>
+                                <td> 2022-04-19 14:16 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/mongodb/" title="开源的跨平台 NoSQL 文档型数据库"> mongodb </a>
+                                    <a href="/help/mongodb/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 12:32 </td>
+                            </tr>
+                            <tr class="row status-syncing">
+                                <td>
+                                    <a class="mirror-item-label" href="/msys2/" title="用于编译原生 Windows 程序的类 Linux 开发环境"> msys2 </a>
+                                    <a href="/help/msys2/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 11:50<span class="label label-status label-info">syncing</span>
+                                </td>
+                            </tr>
+                            <tr class="row status-syncing">
+                                <td>
+                                    <a class="mirror-item-label" href="/mxlinux/" title="基于 Debian 的中量级的 Linux 发行版"> mxlinux </a>
+                                </td>
+                                <td> 2022-04-19 15:04<span class="label label-status label-info">syncing</span>
+                                </td>
+                            </tr>
+                            <tr class="row status-syncing">
+                                <td>
+                                    <a class="mirror-item-label" href="/osdn/storage/g/m/mx/mx-linux/ISOs/" title="MX Linux 的安装镜像"> mxlinux-isos </a>
+                                </td>
+                                <td> 2022-04-19 17:17<span class="label label-status label-info">syncing</span>
+                                </td>
+                            </tr>
+                            <tr class="row status-syncing">
+                                <td>
+                                    <a class="mirror-item-label" href="/mysql/" title="MySQL 数据库的安装包及各种工具下载"> mysql </a>
+                                    <a href="/help/mysql/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 20:29<span class="label label-status label-info">syncing</span>
+                                </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/neurodebian/" title="用于神经科学研究的 Debian 软件包源"> neurodebian </a>
+                                </td>
+                                <td> 2022-04-19 16:30 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/nix/" title="Nix 软件包管理器"> nix </a>
+                                    <a href="/help/nix/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 02:45 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/nix-channels/" title="Nixpkgs 软件包发行版"> nix-channels </a>
+                                </td>
+                                <td> 2022-04-19 19:24 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/nixos-images/" title="NixOS 的安装镜像和虚拟机镜像"> nixos-images </a>
+                                </td>
+                                <td> 2022-04-19 18:30 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/nixpkgs.git/" title="???"> nixpkgs.git </a>
+                                </td>
+                                <td> 2022-04-19 19:07 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/nodejs-release/" title="预编译的 Node.js 二进制程序"> nodejs-release </a>
+                                    <a href="/help/nodejs-release/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 16:08 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/github-release/obsproject/obs-studio/" title="自由的流媒体与视频录制程序（Open Broadcast Software）"> obs-studio </a>
+                                </td>
+                                <td> 2022-04-19 14:16 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/ohmyzsh.git/" title="???"> ohmyzsh.git </a>
+                                    <span class="label label-new">new</span>
+                                    <a href="/help/ohmyzsh.git/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 20:32 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/openeuler/" title="华为公司开源的服务器操作系统"> openeuler </a>
+                                </td>
+                                <td> 2022-04-19 21:00 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/openresty/" title="基于 Nginx 与 Lua 的高性能 Web 平台"> openresty </a>
+                                </td>
+                                <td> 2022-04-19 19:14 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/opensuse/" title="openSUSE 的安装镜像和官方软件包仓库"> opensuse </a>
+                                    <a href="/help/opensuse/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 19:00 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/openthos/" title="OpenTHOS 的二进制发行包"> openthos </a>
+                                </td>
+                                <td> 2022-04-19 18:25 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/help/openthos-src/" title="OpenTHOS 源代码仓库"> openthos-src </a>
+                                    <a href="/help/openthos-src/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 20:17 </td>
+                            </tr>
+                            <tr class="row status-syncing">
+                                <td>
+                                    <a class="mirror-item-label" href="/openwrt/" title="OpenWrt/LEDE 软件包镜像源"> openwrt </a>
+                                    <a href="/help/openwrt/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 13:22<span class="label label-status label-info">syncing</span>
+                                </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/github-release/openark/orchestrator/" title="MySQL 高可用与复制管理工具"> orchestrator </a>
+                                </td>
+                                <td> 2022-04-19 14:16 </td>
+                            </tr>
+                            <tr class="row status-syncing">
+                                <td>
+                                    <a class="mirror-item-label" href="/osdn/" title="OSDN 网站提供的开源软件下载"> osdn </a>
+                                </td>
+                                <td> 2022-04-19 17:17<span class="label label-status label-info">syncing</span>
+                                </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/osmc/" title="免费、开源的媒体中心解决方案"> osmc </a>
+                                </td>
+                                <td> 2022-04-19 20:31 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/packman/" title="为 Debian、Fedora、openSUSE、Ubuntu 提供额外和过期软件包的仓库"> packman </a>
+                                </td>
+                                <td> 2022-04-19 20:40 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/parrot/" title="Parrot Linux（专注于安全审计的 Linux 发行版）的安装映像和官方软件源"> parrot </a>
+                                </td>
+                                <td> 2022-04-19 20:47 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/percona/" title="开源的数据库解决方案，详见 http://www.percona.com"> percona </a>
+                                </td>
+                                <td> 2022-04-19 18:03 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/pkgsrc/" title="NetBSD 的第三方软件源"> pkgsrc </a>
+                                </td>
+                                <td> 2022-04-19 18:48 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/postgresql/" title="著名的开源关系型数据库 PostgreSQL 的镜像"> postgresql </a>
+                                </td>
+                                <td> 2022-04-19 18:47 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/postmarketOS/" title="???"> postmarketOS </a>
+                                    <a href="/help/postmarketOS/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 15:13 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/postmarketOS-images/" title="???"> postmarketOS-images </a>
+                                </td>
+                                <td> 2022-04-19 19:17 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/github-release/prometheus/prometheus/" title="一个系统与服务监控系统"> prometheus </a>
+                                </td>
+                                <td> 2022-04-19 14:16 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/proxmox/" title="服务器虚拟化环境 Linux 发行版 Proxmox VE"> proxmox </a>
+                                    <a href="/help/proxmox/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 02:13 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/puppy/" title="为家用电脑设计的轻量级 Linux 发行版"> puppy </a>
+                                </td>
+                                <td> 2022-04-19 15:35 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/putty/" title="???"> putty </a>
+                                </td>
+                                <td> 2022-04-19 20:52 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/pybombs/" title="为 GNU Radio 设计的编译管理系统"> pybombs </a>
+                                    <a href="/help/pybombs/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 19:22 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/pypi/" title="Python 软件包索引源"> pypi </a>
+                                    <a href="/help/pypi/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 21:02 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/help/qemu.git/" title="处理器模拟器 QEMU 的源码 Git 仓库"> qemu.git </a>
+                                    <a href="/help/qemu.git/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 20:53 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/qt/" title="跨平台软件开发库 Qt 的源码、开发工具、文档等"> qt </a>
+                                    <a href="/help/qt/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 19:18 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/qubesos/" title="一个面向安全的桌面操作系统，利用虚拟化技术隔离应用来提供安全保障"> qubesos </a>
+                                    <a href="/help/qubesos/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 20:59 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/racket-installers/" title="Racket 语言环境安装包"> racket-installers </a>
+                                </td>
+                                <td> 2022-04-19 19:44 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/raspberry-pi-os-images/" title="Raspberry Pi OS （原 Raspbian）的安装镜像"> raspberry-pi-os-images </a>
+                                </td>
+                                <td> 2022-04-19 14:37 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/raspberrypi/" title="一些专为树莓派提供的 Debian 软件包"> raspberrypi </a>
+                                </td>
+                                <td> 2022-04-19 19:40 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/raspbian/" title="为树莓派编译的 Debian 系统软件源"> raspbian </a>
+                                    <a href="/help/raspbian/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 18:40 </td>
+                            </tr>
+                            <tr class="row status-failed">
+                                <td>
+                                    <a class="mirror-item-label" href="/redhat/" title="Red Hat Enterprise Linux 源码包（SRPM）仓库"> redhat </a>
+                                </td>
+                                <td> 2022-04-11 18:31<span class="label label-status label-warning">failed</span>
+                                </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/remi/" title="包含最新版本 PHP 和 MySQL 的第三方 yum 源"> remi </a>
+                                </td>
+                                <td> 2022-04-19 10:24 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/repo-ck/" title="repo-ck 是 Arch 的非官方仓库，内有包含 ck 补丁、BFS 调度器等"> repo-ck </a>
+                                    <a href="/help/repo-ck/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 20:38 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/ros/" title="ROS提供一系列程序库和工具以帮助软件开发者创建机器人应用软件"> ros </a>
+                                    <a href="/help/ros/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 15:19 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/ros2/" title="ROS (Robot Operating System) 2.0 版本"> ros2 </a>
+                                    <a href="/help/ros2/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 13:15 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/rpmfusion/" title="RPM Fusion 提供了一些 Fedora Project 和 Red Hat 不包含的软件"> rpmfusion </a>
+                                    <a href="/help/rpmfusion/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 20:48 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/rubygems/" title="Ruby 的一个包管理器"> rubygems </a>
+                                    <a href="/help/rubygems/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 20:48 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/rudder/" title="自动化 IT 基础设施配置与审计工具"> rudder </a>
+                                    <a href="/help/rudder/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-18 07:37 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/github-release/rust-analyzer/rust-analyzer/" title="Rust 语言的模块化编译器前端"> rust-analyzer </a>
+                                </td>
+                                <td> 2022-04-19 14:16 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/rustup/" title="Rust 的官方安装工具"> rustup </a>
+                                    <a href="/help/rustup/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 08:03 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/sagemath/" title="构建在 NumPy, SciPy 等工具之上的开源数学软件系统"> sagemath </a>
+                                </td>
+                                <td> 2022-04-19 15:47 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/saltstack/" title="基于 python 的配置管理与运维自动化工具"> saltstack </a>
+                                </td>
+                                <td> 2022-04-19 08:56 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/slackware/" title="Linux 发行版 Slackware 的源代码和官方软件包仓库"> slackware </a>
+                                </td>
+                                <td> 2022-04-19 17:19 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/slackwarearm/" title="用于 ARM 设备的 Slackware 发行版源代码和官方软件包仓库"> slackwarearm </a>
+                                </td>
+                                <td> 2022-04-19 19:42 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/solus/" title="Solus 的软件仓库，致力于制作对新手友好的发行版"> solus </a>
+                                    <a href="/help/solus/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 17:58 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/stackage/" title="Haskell 项目管理器 stack 所需的元数据与 ghc 安装包的镜像"> stackage </a>
+                                    <a href="/help/stackage/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 20:01 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/steamos/" title="Valve 开发的基于 Debian 的操作系统，包含安装镜像和官方软件包仓库"> steamos </a>
+                                </td>
+                                <td> 2022-04-19 02:05 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/github-release/Stellarium/stellarium/" title="自由的模拟天文台软件"> stellarium </a>
+                                </td>
+                                <td> 2022-04-19 14:16 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/termux/" title="运行在 Android 上的终端模拟器 Termux 的官方软件包仓库"> termux </a>
+                                    <a href="/help/termux/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 18:33 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/tex-historic-archive/" title="???"> tex-historic-archive </a>
+                                </td>
+                                <td> 2022-04-19 05:22 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/github-release/texstudio-org/texstudio/" title="使用 Qt 编写的自由的 LaTeX 套件"> texstudio </a>
+                                </td>
+                                <td> 2022-04-19 14:16 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/github-release/tuna/thuthesis" title="清华大学学位论文 LaTeX 模板"> thuthesis </a>
+                                </td>
+                                <td> 2022-04-19 14:16 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/tinycorelinux/" title="为嵌入式开发的微型 Linux 发行版"> tinycorelinux </a>
+                                </td>
+                                <td> 2022-04-19 15:40 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/tlpretest/" title="TeX Live 测试版本的软件包仓库与安装镜像"> tlpretest </a>
+                                    <a href="/help/tlpretest/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 17:30 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/tuna/" title="TUNA 协会资料存档"> tuna </a>
+                                </td>
+                                <td> - </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/u.sb/" title="为 Debian / Ubuntu 编译的最新版 nginx"> u.sb </a>
+                                    <span class="label label-new">new</span>
+                                </td>
+                                <td> 2022-04-19 21:02 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/ubuntu/" title="流行的 Linux 发行版 Ubuntu 的安装镜像和官方软件包仓库"> ubuntu </a>
+                                    <a href="/help/ubuntu/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 20:06 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/ubuntu-cdimage/" title="Ubuntu 及 Ubuntu 衍生版各版本安装镜像"> ubuntu-cdimage </a>
+                                </td>
+                                <td> 2022-04-19 20:15 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/ubuntu-cloud-images/" title="适用于公有云的 Ubuntu 安装镜像"> ubuntu-cloud-images </a>
+                                    <a href="/help/ubuntu-cloud-images/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 18:01 </td>
+                            </tr>
+                            <tr class="row status-syncing">
+                                <td>
+                                    <a class="mirror-item-label" href="/ubuntu-ports/" title="armhf, arm64 以及 powerpc 等平台的 Ubuntu 软件仓库"> ubuntu-ports </a>
+                                    <a href="/help/ubuntu-ports/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 14:40<span class="label label-status label-info">syncing</span>
+                                </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/ubuntu-releases/" title="包含近几年发行的 Ubuntu 的镜像"> ubuntu-releases </a>
+                                </td>
+                                <td> 2022-04-19 16:58 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/ubuntukylin/" title="???"> ubuntukylin </a>
+                                </td>
+                                <td> 2022-04-19 17:07 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/ubuntukylin-cdimage/" title="???"> ubuntukylin-cdimage </a>
+                                </td>
+                                <td> 2022-04-19 17:28 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/videolan-ftp/" title="简称VLC，是一款自由、开源的跨平台多媒体播放器及框架，可播放大多数多媒体文件"> videolan-ftp </a>
+                                </td>
+                                <td> 2022-04-19 01:39 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/virtualbox/" title="Oracle 的开源的 x86 架构虚拟机"> virtualbox </a>
+                                    <a href="/help/virtualbox/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 13:02 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/voidlinux/" title="基于 xbps 包管理器的独立 Linux 发行版"> voidlinux </a>
+                                    <a href="/help/voidlinux/">
+                                        <i aria-hidden="true" class="question-circle" title="Help">
+												<svg class="icon">
+													<use xlink:href="https://mirrors.tuna.tsinghua.edu.cn/legacy_index#fas.fa-question-circle"></use>
+												</svg>
+											</i>
+                                        <span class="sr-only">[Help]</span>
+                                    </a>
+                                </td>
+                                <td> 2022-04-19 17:52 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/winehq/" title="Wine （允许类 Unix 操作系统运行 Windows 程序）"> winehq </a>
+                                </td>
+                                <td> 2022-04-19 18:51 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/wireshark/" title="一个免费开源的网络数据包分析软件"> wireshark </a>
+                                    <span class="label label-new">new</span>
+                                </td>
+                                <td> 2022-04-19 19:17 </td>
+                            </tr>
+                            <tr class="row status-success">
+                                <td>
+                                    <a class="mirror-item-label" href="/zabbix/" title="著名的网络监视、管理系统"> zabbix </a>
+                                </td>
+                                <td> 2022-04-19 20:57 </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
